@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { motion } from 'framer-motion'
 
 type FlashCardT = {
     front: string
@@ -9,19 +10,30 @@ export default function FlashCard(props: FlashCardT) {
     const [flipped, setFlipped] = useState(false)
 
     return (
-        <div onClick={() => setFlipped(!flipped)} className="w-64 h-40 items-center flex justify-center bg-white shadow-lg rounded-lg cursor-pointer transition-transform transform perspective-1000">
-            <div className={`relative w-full h-full flex items-center justify-center text-lg font-semibold text-gray-800 p-4 rounded-lg transition-transform duration-500 ease-in-out ${flipped ? "rotate-y-180" : ""}`}
-                style={{ transformStyle: 'preserve-3d' }}>
+        <motion.div onClick={() => setFlipped(!flipped)}
+            whileHover={{ scale: 1.05 }}
+            className="w-64 h-40 items-center flex justify-center bg-white shadow-lg rounded-lg cursor-pointer perspective-1000">
+            <motion.div className={`relative w-full h-full transition-transform duration-500 `}
+                style={{ transformStyle: 'preserve-3d', rotateY: flipped ? 180 : 0 }}>
                 {/* front */}
-                <div className="absolute w-full h-full flex items-center  justify-center bg-white shadow-lg rounded-lg backface-hidden">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute w-full h-full flex items-center  justify-center bg-white shadow-lg rounded-lg backface-hidden">
                     <p className="text-lg font-semibold text-gray-800">{props.front}</p>
-                </div>
+                </motion.div>
 
                 {/* Back Side */}
-                <div className="absolute w-full h-full flex items-center justify-center bg-blue-500 text-white shadow-lg rounded-lg backface-hidden rotate-y-180">
+                <motion.div
+                    style={{ rotateY: 180 }}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="absolute w-full h-full flex items-center justify-center bg-blue-500 text-white shadow-lg rounded-lg backface-hidden rotate-y-180">
                     <p className="text-lg font-semibold">{props.back}</p>
-                </div>
-            </div>
-        </div>
+                </motion.div>
+            </motion.div>
+        </motion.div>
     )
 }
