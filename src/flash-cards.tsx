@@ -34,7 +34,6 @@ export default function FlashCard(props: FlashCardT) {
                     <p className="text-lg font-semibold">{props.back}</p>
                 </motion.div>
             </motion.div>
-            <motion.div>apa saja</motion.div>
         </motion.div>
     )
 }
