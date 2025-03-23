@@ -18,9 +18,6 @@ function App() {
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
-  // const [learned, setLearned] = useState<number[]>(() => {
-  //   return JSON.parse(localStorage.getItem("learned") ?? "[]") as number[]
-  // })
 
   const { learned, setLearned, setClearLearned } = useStore(cardsStore)
 
@@ -70,12 +67,6 @@ function App() {
     }
   }, [darkMode]);
 
-  // // Save learned cards to localStorage
-  // useEffect(() => {
-  //   localStorage.setItem("learned", JSON.stringify(learned));
-  // }, [learned]);
-
-
   return (
     <div className='min-h-screen max-w-screen flex justify-center items-center P-4'>
       <div className='flex flex-col items-center  bg-gray-100 p-4 dark:bg-gray-900 min-h-screen min-w-[600px]'>
@@ -91,7 +82,7 @@ function App() {
 
         {/* Progress tracker */}
         <p className='text-gray-700 mb-2 dark:text-white'>
-          Card {currentIndex + 1} of {cards.length} | Reviewed : {reviewed}
+          Card {currentIndex + 1} of {cards.length}
         </p>
 
 
