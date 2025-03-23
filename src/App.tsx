@@ -3,31 +3,25 @@ import './App.css'
 import FlashCard from './flash-cards'
 import { useStore } from 'zustand';
 import { cardsStore } from './state-management/store';
+import { LOCAL_STORAGE_KEY } from './constant';
 
 function App() {
 
-  const initialCards = [
-    { id: 1, front: "What is React?", back: "A JavaScript library for UI." },
-    { id: 2, front: "What is JSX?", back: "A syntax extension for JavaScript." },
-    { id: 3, front: "What is Tailwind?", back: "A utility-first CSS framework." },
-    { id: 4, front: "What is useState?", back: "A React Hook for state management." },
-  ];
-  const [cards, setCards] = useState(initialCards)
+
+  // const [cards, setCards] = useState(initialCards)
+  const { learned, setLearned, setClearLearned, cards, setShuffleCards } = useStore(cardsStore)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [reviewed, setReviewed] = useState(0)
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
 
-  const { learned, setLearned, setClearLearned } = useStore(cardsStore)
-
 
   // shuffle cards randomly
   function shuffleCards() {
-    setCards(prevState => (prevState.sort(() => Math.random() - 0.5)))
+    setShuffleCards()
     setCurrentIndex(0)
     setReviewed(0)
-
   }
 
   function nextCard() {
@@ -50,7 +44,7 @@ function App() {
 
   function handleResetProgress() {
     setClearLearned()
-    localStorage.removeItem("learned")
+    localStorage.removeItem(LOCAL_STORAGE_KEY.LEARNED)
   }
 
   // Apply the theme class to <html>
