@@ -1,54 +1,20 @@
-# React + TypeScript + Vite
+# Japanese Flash Card
+Project ini saya buat untuk membantu perjalanan bahasa jepang saya.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Perjalanan / Progress
+Tahap awal pengembangan jp-flashcard dibuat dengan react typescript dan juga tailwind untuk styling.
+User interface dari project ini masih sangat sederhana dan perlu pengembangan lagi agar lebih ramah UI/UX
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Fitur / Fearures
+- [x] Mode Gelap /Dark mode
+- [x] Tandai sudah dipelajari / Mark Card Learned
+- [x] Hapus semua yang sudah dipelajari / Delete All Mark as Learned
+- [x] Acak Kartu / Shuffle Card
+- [x] Tombol ke Kartu Selanjutnya / Next Button
+- [x] Tombol ke Kartu Sebelumnya / Previous Button
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Next Perbaikan / Improvements
+- [] Connect dengan database untuk data flashcardnya.
+- [] Fitur spaced repetition
+- [] Fitur memilih level kesulitan
