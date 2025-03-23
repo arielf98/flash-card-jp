@@ -9,7 +9,19 @@ interface CardsT {
 
 export const cardsStore = create<CardsT>()((set) => ({
   cards: [],
-  learned: [],
-  setLearned: (id) => set((state) => ({ learned: [...state.learned, id] })),
-  setClearLearned: () => set({ learned: [] }),
+  learned:
+    (JSON.parse(localStorage.getItem("learned") ?? "[]") as number[]) ?? [],
+  setLearned: (id) => {
+    set((state) => {
+      const updateLearned = [...state.learned, id];
+      localStorage.setItem("learned", JSON.stringify(updateLearned));
+      return { learned: [...state.learned, id] };
+    });
+  },
+  setClearLearned: () => {
+    set(() => {
+      localStorage.removeItem("learned");
+      return { learned: [] };
+    });
+  },
 }));
