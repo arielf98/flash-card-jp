@@ -45,9 +45,7 @@ function App() {
   }
 
   function handleMarkAsLearned(id: number) {
-    if (!learned.includes(id)) {
-      setLearned(id)
-    }
+    setLearned(id)
   }
 
   function handleResetProgress() {
