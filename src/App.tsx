@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css'
 import FlashCard from './flash-cards'
+import { useStore } from 'zustand';
+import { cardsStore } from './state-management/store';
 
 function App() {
 
@@ -16,9 +18,11 @@ function App() {
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
-  const [learned, setLearned] = useState<number[]>(() => {
-    return JSON.parse(localStorage.getItem("learned") ?? "[]") as number[]
-  })
+  // const [learned, setLearned] = useState<number[]>(() => {
+  //   return JSON.parse(localStorage.getItem("learned") ?? "[]") as number[]
+  // })
+
+  const { learned, setLearned, setClearLearned } = useStore(cardsStore)
 
 
   // shuffle cards randomly
@@ -26,6 +30,7 @@ function App() {
     setCards(prevState => (prevState.sort(() => Math.random() - 0.5)))
     setCurrentIndex(0)
     setReviewed(0)
+
   }
 
   function nextCard() {
@@ -44,12 +49,13 @@ function App() {
 
   function handleMarkAsLearned(id: number) {
     if (!learned.includes(id)) {
-      setLearned([...learned, id])
+      setLearned(id)
     }
   }
 
   function handleResetProgress() {
-    setLearned([])
+    // setLearned([])
+    setClearLearned()
     localStorage.removeItem("learned")
   }
 
@@ -64,10 +70,10 @@ function App() {
     }
   }, [darkMode]);
 
-  // Save learned cards to localStorage
-  useEffect(() => {
-    localStorage.setItem("learned", JSON.stringify(learned));
-  }, [learned]);
+  // // Save learned cards to localStorage
+  // useEffect(() => {
+  //   localStorage.setItem("learned", JSON.stringify(learned));
+  // }, [learned]);
 
 
   return (

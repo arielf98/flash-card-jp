@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { motion } from 'framer-motion'
+import { useStore } from "zustand"
+import { cardsStore } from "./state-management/store"
 
 interface FlashCardT {
     front: string
@@ -9,9 +11,7 @@ interface FlashCardT {
 
 export default function FlashCard(props: FlashCardT) {
     const [flipped, setFlipped] = useState(false)
-    const [learned,] = useState<number[]>(() => {
-        return JSON.parse(localStorage.getItem("learned") ?? "[]") as number[]
-    })
+    const { learned } = useStore(cardsStore)
 
     const learned_opacity = learned.includes(props.id) ? 0.5 : 1
 
