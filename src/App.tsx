@@ -51,7 +51,6 @@ function App() {
   }
 
   function handleResetProgress() {
-    // setLearned([])
     setClearLearned()
     localStorage.removeItem("learned")
   }
